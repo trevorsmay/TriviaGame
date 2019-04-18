@@ -101,13 +101,12 @@ $(document).ready(function () {
         choice = myQuestions[index];
         $("#questions").html("<h2>" + choice.question + "</h2>");
         //for(var i = 0; i< choice.answers.length; i++) {
-     
+     //**** issues: cannot get the other options to populate in the buttons. */
         var userSelection = $("<div>");
         //userSelection.addClass("answerselection");
         userSelection.html(choice.question);//[i]
         userSelection.attr("data-guessvalue");//+i
         $("button").html(userSelection);
-         
         }
     
 
