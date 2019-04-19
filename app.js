@@ -100,7 +100,7 @@ $(document).ready(function () {
         index = Math.floor(Math.random() * myQuestions.length);
         choice = myQuestions[index];
         $("#questions").html("<h2>" + choice.question + "</h2>");
-        //for(var i = 0; i< choice.answers.length; i++) {
+        //for(var i = 0; i< choice.questions.length; i++) {
      //**** issues: cannot get the other options to populate in the buttons. */
         var userSelection = $("<div>");
         //userSelection.addClass("answerselection");
