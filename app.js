@@ -97,6 +97,7 @@ $(document).ready(function () {
     
     
     function displayQuestion () {
+        $("button").empty();
         index = Math.floor(Math.random() * myQuestions.length);
         choice = myQuestions[index];
         $("#questions").html("<h2>" + choice.question + "</h2>");
@@ -127,5 +128,5 @@ $(document).ready(function () {
         }
         console.log(correctAnswer);
     })
-    
+    displayQuestion();
     })
