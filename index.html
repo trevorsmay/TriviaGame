@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en-us">
     <head>
+        <meta charset="UTF-8">
         <style> 
         body {
             border: 5px solid box;
@@ -28,21 +29,18 @@
        <div class="quiz">
             <h1><span class="badge badge-secondary badge-dark">History Quiz!</span></h1> 
            <div id="questions"></div><br>
-           <div class="answers">
-                <button type="button1" class="btn btn-dark"></button>
-                <button type="button2" class="btn btn-dark"></button>
-                <button type="button3" class="btn btn-dark"></button>
-                <button type="button4" class="btn btn-dark"></button>
+           <div id="answers">
+
            </div><br>
            <div id="countdown"></div>
-           <button class ="btn btn-dark" id ="start">Start the Game</button>
+           <button type="button" class="btn btn-dark" id ="start">Start the Game</button>
 
        </div>
        <script>
-       $(document).ready(function () {
+$(document).ready(function () {
 
 
-//display questions with answer array.
+//display questions with answer object.
 
 var myQuestions = [
     {
@@ -105,6 +103,8 @@ var index;
 var running=false;
 
 
+$("#reset").hide();
+// function that starts the timer, displays the questions, runs through loop of questions.
 $("#start").on("click", function () {
     $("#start").hide();
     displayQuestion();
@@ -130,28 +130,28 @@ function decrement () {
         stop();
     }
 }
+
 function stop() {
     running = false;
     clearInterval(timerInterval);
 }
 
-
-
 function displayQuestion () {
-    $("button").empty();
+    //$("button").empty();
     index = Math.floor(Math.random() * myQuestions.length);
     choice = myQuestions[index];
     $("#questions").html("<h2>" + choice.question + "</h2>");
-    //for(var i = 0; i< choice.questions.length; i++) {
+    for(var i = 0; i< choice.question.length; i++) {
  //**** issues: cannot get the other options to populate in the buttons. */
     var userSelection = $("<div>");
-    //userSelection.addClass("answerselection");
-    userSelection.html(choice.question);//[i]
-    userSelection.attr("data-guessvalue");//+i
-    $("button").html(userSelection);
+    userSelection.addClass("answerselection");
+    userSelection.html(choice.answers[i]);//[i]
+    userSelection.attr("data-guessvalue", i);//+i
+
+    $("#answers").append(userSelection);
+   // $("button").html(userSelection);
     }
-
-
+    }
 
 $(".answerselection").on("click", function() {
     userGuess = parseInt($(this).attr("data-guessvalue"));
@@ -167,10 +167,14 @@ $(".answerselection").on("click", function() {
         userGuess="";
         $("#answers").html("<p>Wrong!</p>");
     }
-    console.log(correctAnswer);
+
+    startTimer();
+    displayQuestion();
+
 })
-displayQuestion();
-})
+
+//displayQuestion();
+});
        </script>
     </body>
 </html>

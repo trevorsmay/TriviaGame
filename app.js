@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 
-    //display questions with answer array.
+    //display questions with answer object.
     
     var myQuestions = [
         {
@@ -63,7 +63,9 @@ $(document).ready(function () {
     var index;
     var running=false;
    
-    
+
+    $("#reset").hide();
+    // function that starts the timer, displays the questions, runs through loop of questions.
     $("#start").on("click", function () {
         $("#start").hide();
         displayQuestion();
@@ -78,7 +80,7 @@ $(document).ready(function () {
             timerInterval = setInterval(decrement, 1000);
             running=true;
         }
-    }
+    };
     
     function decrement () {
         $("#countdown").html("<h3>Time Remaining: " + timer + "</h3>");
@@ -88,13 +90,12 @@ $(document).ready(function () {
             wrongAnswers ++ ;
             stop();
         }
-    }
+    };
+
     function stop() {
         running = false;
         clearInterval(timerInterval);
-    }
-    
-    
+    };
     
     function displayQuestion () {
         $("button").empty();
@@ -108,10 +109,8 @@ $(document).ready(function () {
         userSelection.html(choice.question);//[i]
         userSelection.attr("data-guessvalue");//+i
         $("button").html(userSelection);
-        }
+        };
     
-
-   
     $(".answerselection").on("click", function() {
         userGuess = parseInt($(this).attr("data-guessvalue"));
     
@@ -127,6 +126,7 @@ $(document).ready(function () {
             $("#answers").html("<p>Wrong!</p>");
         }
         console.log(correctAnswer);
-    })
+    });
+
     displayQuestion();
-    })
+    });
